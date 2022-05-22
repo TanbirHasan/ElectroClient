@@ -1,22 +1,61 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
 import auth from '../firebase.init';
 import useItemsDetails from '../Hooks/useItemsDetails';
+import Loading from '../Shared/Loading';
 
 
 
 const Purchase = () => {
       const { id } = useParams();
-      const [user] = useAuthState(auth);
+      const [user,loading] = useAuthState(auth);
       console.log(user);
    
    const [product] = useItemsDetails(id);
-   console.log(product)
+   console.log(product);
+
+
+
+
+        const [quantity, setQuantity] = useState();
+
+        useEffect(() => {
+          setQuantity(product.quantity);
+        }, [product]);
+
+
+     const amountref = useRef();
+
+     const handlerestock = (e, id) => {
+       e.preventDefault();
+       const number = parseInt(amountref.current.value);
+
+       setQuantity(quantity + number);
+
+       const increasedquantity = { quantity };
+
+       const url = `http://localhost:7000/increase/${id}`;
+       fetch(url, {
+         method: "PUT",
+         headers: {
+           "Content-Type": "application/json",
+         },
+         body: JSON.stringify(increasedquantity),
+       })
+         .then((res) => res.json())
+         .then((data) => {
+           console.log("succes", data);
+           alert("Quantity updated succesfully");
+         });
+     };
+        if (loading) {
+          return <Loading></Loading>;
+        }
      
     return (
-      <div className="flex justify-evenly items-center">
-        <div>
+      <div>
+        <div className='flex justify-evenly'>
           <div class="card w-96 bg-base-100 shadow-xl">
             <figure>
               <img src={product?.img} alt="Shoes" />
@@ -31,6 +70,27 @@ const Purchase = () => {
                 <h3>Price:{product.priceperunit} $</h3>
               </div>
             </div>
+          </div>
+          <div className="flex flex-col items-center">
+         
+            <form
+              className="flex flex-col  px-5 py-10 mx-5 my-5  border-solid border-2"
+              onSubmit={(e) => handlerestock(e, id)}
+            >
+             
+              <input
+                type="number"
+                placeholder='Increse Items'
+                className="border-solid border-2 my-5"
+                ref={amountref}
+              />
+              <button
+                className="flex mb-3 bg-orange-600 text-white rounded-md px-2 py-2 w-full"
+                type="submit"
+              >
+                Submit
+              </button>
+            </form>
           </div>
         </div>
 
@@ -47,8 +107,10 @@ const Purchase = () => {
                 name="cus_name"
                 type="text"
                 required=""
+                value={user.displayName}
                 placeholder="Your Name"
                 aria-label="Name"
+                disabled
               />
             </div>
             <div class="mt-2">
