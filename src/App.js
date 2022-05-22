@@ -18,17 +18,17 @@ import { createContext, useState } from 'react';
 import ProductDetails from './Pages/ProductDetails';
 
 
- export const Mycontext = createContext();
+
 
 
 function App() {
 
 
-  const [product,setProduct] = useState();
+
   return (
-    <Mycontext.Provider value={{ product, setProduct }}>
+
       <div className="App">
-        <h3>This is :{product?.name}</h3>
+    
         <Navbar />
 
         <Routes>
@@ -44,7 +44,7 @@ function App() {
 
         <Footer />
       </div>
-    </Mycontext.Provider>
+
   );
 }
 

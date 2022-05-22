@@ -1,37 +1,34 @@
 import React, { useContext, useEffect, useState } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
+import auth from '../firebase.init';
+import useItemsDetails from '../Hooks/useItemsDetails';
+
 
 
 const Purchase = () => {
       const { id } = useParams();
-      console.log(id)
-      const [product, setProduct] = useState();
-        useEffect(() => {
-        
-          fetch("toolsdata.json")
-            .then((res) => res.json())
-            .then((data) =>  console.log(data));
-            ;
-        }, []);
+      const [user] = useAuthState(auth);
+      console.log(user);
+   
+   const [product] = useItemsDetails(id);
+   console.log(product)
+     
     return (
-      <div>
+      <div className="flex justify-evenly items-center">
         <div>
           <div class="card w-96 bg-base-100 shadow-xl">
             <figure>
-              <img
-                src={product?.image}
-                alt="Shoes"
-              />
+              <img src={product?.img} alt="Shoes" />
             </figure>
             <div class="card-body">
               <h2 class="card-title">
                 {product?.name}
                 <div class="badge badge-secondary">NEW</div>
               </h2>
-           
-              <div class="card-actions justify-end">
-                <div class="badge badge-outline">Fashion</div>
-                <div class="badge badge-outline">Products</div>
+
+              <div class="card-actions justify-start">
+                <h3>Price:{product.priceperunit} $</h3>
               </div>
             </div>
           </div>
@@ -62,10 +59,12 @@ const Purchase = () => {
                 class="w-full px-5  py-4 text-gray-700 bg-gray-200 rounded"
                 id="cus_email"
                 name="cus_email"
+                value={user?.email}
                 type="text"
                 required=""
                 placeholder="Your Email"
                 aria-label="Email"
+                disabled
               />
             </div>
             <div class="mt-2">

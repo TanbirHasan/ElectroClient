@@ -1,17 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+import useItems from '../Hooks/UseItems';
 import Singletools from './Singletools';
 
 
 const Tools = () => {
 
-    const [tools,setTools] = useState([]);
+   const [products, setProducts] = useItems();
 
-    useEffect(() => {
-        fetch("toolsdata.json")
-        .then(res => res.json())
-        .then(data => setTools(data))
-    },[])
+   
+
+ 
 
  
    
@@ -20,10 +19,12 @@ const Tools = () => {
 
    
     return (
-      <div className='my-20 lg:px-20 sm:px-3'>
-          <h2 className='text-4xl font-bold text-center'>Tools And Accessories</h2>
+      <div className="my-20 lg:px-20 sm:px-3">
+        <h2 className="text-4xl font-bold text-center">
+          Tools And Accessories
+        </h2>
         <div className="flex lg:flex-row justify-between flex-wrap sm:flex-col ">
-          {tools.map((tools) => (
+          {products.map((tools) => (
             <Singletools tools={tools} />
           ))}
         </div>

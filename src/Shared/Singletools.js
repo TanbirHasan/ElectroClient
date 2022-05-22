@@ -12,7 +12,7 @@ const Singletools = ({tools}) => {
    
 
     const {
-      id,
+      _id,
       name,
       img,
       description,
@@ -43,7 +43,7 @@ const Singletools = ({tools}) => {
           
               <button
                 class="btn btn-primary"
-                onClick={() => navigattoproductDetails(id)}
+                onClick={() => navigattoproductDetails(_id)}
               >
                 Order
               </button>
