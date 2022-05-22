@@ -13,24 +13,38 @@ import Home from './Pages/Home';
 import Login from "./Pages/Login";
 import Register from "./Pages/Register";
 import NotFound from './Shared/NotFound';
+import Purchase from './Pages/Purchase';
+import { createContext, useState } from 'react';
+import ProductDetails from './Pages/ProductDetails';
+
+
+ export const Mycontext = createContext();
 
 
 function App() {
+
+
+  const [product,setProduct] = useState();
   return (
-    <div className="App">
-      <Navbar />
+    <Mycontext.Provider value={{ product, setProduct }}>
+      <div className="App">
+        <h3>This is :{product?.name}</h3>
+        <Navbar />
 
-      <Routes>
-        <Route exact path="/" element={<Home />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/about" element={<About />}></Route>
-        <Route path="/login" element={<Login />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="*" element={<NotFound />}></Route>
-      </Routes>
+        <Routes>
+          <Route exact path="/" element={<Home />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/about" element={<About />}></Route>
+          <Route path="/productdetails" element={<ProductDetails />}></Route>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/purchase/:id" element={<Purchase />}></Route>
+          <Route path="*" element={<NotFound />}></Route>
+        </Routes>
 
-      <Footer />
-    </div>
+        <Footer />
+      </div>
+    </Mycontext.Provider>
   );
 }
 

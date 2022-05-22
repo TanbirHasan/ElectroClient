@@ -12,6 +12,8 @@ const Tools = () => {
         .then(res => res.json())
         .then(data => setTools(data))
     },[])
+
+ 
    
  
     // const {data : tools} = useQuery("tools", () => fetch("toolsdata.json").then(res => res.json()))
