@@ -11,7 +11,7 @@ const BuisnessSummery = () => {
             <h2 className="text-3xl font-semibold">Buisness Summery</h2>
           </div>
           <div className='py-10'>
-            <div class="stats shadow">
+            <div class="stats shadow lg:grid grid-cols-3 sm:grid grid-rows-1">
               <div class="stat">
                 <div class="stat-figure text-primary">
                   <i class="fa-solid fa-users text-2xl"></i>
