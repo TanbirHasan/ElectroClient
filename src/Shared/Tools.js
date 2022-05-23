@@ -23,7 +23,7 @@ const Tools = () => {
         <h2 className="text-4xl font-bold text-center">
           Tools And Accessories
         </h2>
-        <div className="flex lg:flex-row justify-between flex-wrap sm:flex-col ">
+        <div className="flex lg:flex-row justify-center flex-wrap sm:flex-col ">
           {products.map((tools) => (
             <Singletools tools={tools} />
           ))}

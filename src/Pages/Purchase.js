@@ -1,3 +1,4 @@
+import { success } from 'daisyui/src/colors';
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useParams } from 'react-router-dom';
@@ -10,53 +11,155 @@ import Loading from '../Shared/Loading';
 const Purchase = () => {
       const { id } = useParams();
       const [user,loading] = useAuthState(auth);
-      console.log(user);
    
-   const [product] = useItemsDetails(id);
-   console.log(product);
+   
+      const [product] = useItemsDetails(id);
+  
 
 
 
 
-        const [quantity, setQuantity] = useState();
+      const [minimumorder, setMinimumorder] = useState(0);
+      const [price,setPrice] = useState();
+      const [totalprice,setTotalprice] = useState()
 
-        useEffect(() => {
-          setQuantity(product.quantity);
-        }, [product]);
+    
 
 
-     const amountref = useRef();
 
-     const handlerestock = (e, id) => {
-       e.preventDefault();
-       const number = parseInt(amountref.current.value);
+     const increaseref = useRef();
+      const reduceref = useRef();
+      const cityref = useRef();   
+      const countryref = useRef();
+      const zipref = useRef();
+      const paymentref = useRef();
 
-       setQuantity(quantity + number);
 
-       const increasedquantity = { quantity };
+     // reducing quantity
+      const reduceQuantity = (e,id) => {
+        e.preventDefault();
 
-       const url = `http://localhost:7000/increase/${id}`;
-       fetch(url, {
-         method: "PUT",
-         headers: {
-           "Content-Type": "application/json",
-         },
-         body: JSON.stringify(increasedquantity),
-       })
-         .then((res) => res.json())
-         .then((data) => {
-           console.log("succes", data);
-           alert("Quantity updated succesfully");
-         });
-     };
+          const number = parseInt(reduceref.current.value);
+
+          console.log(minimumorder);
+        
+            setMinimumorder(minimumorder - number);
+            const updatednumber = minimumorder - number;
+            console.log(minimumorder);
+            const updatedquantity = { updatednumber };
+
+            console.log(updatedquantity);
+
+            const url = `http://localhost:7000/reduce/${id}`;
+            fetch(url, {
+              method: "PUT",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(updatedquantity),
+            })
+              .then((res) => res.json())
+              .then((data) => {
+                console.log("succes", data);
+              });
+       
+
+         console.log(minimumorder);
+
+      };
+
+
+     useEffect(() => {
+       
+     }, [])
+      const handlerestock = (e, id) => {
+        e.preventDefault();
+        const number = parseInt(increaseref.current.value);
+
+        setMinimumorder(minimumorder + number);
+        setPrice(number*price);
+      
+
+    
+        const updatedquantity = minimumorder + number;
+        const pricerperunit = price;
+        const updatedprice = pricerperunit * number;
+        console.log(price)
+        console.log(number);
+      
+        console.log(updatedquantity);
+
+
+        const increasedquantity = { updatedquantity, updatedprice }; 
+
+
+        console.log(increasedquantity);
+
+       
+
+        // const url = `http://localhost:7000/increase/${id}`;
+        // fetch(url, {
+        //   method: "PUT",
+        //   headers: {
+        //     "Content-Type": "application/json",
+        //   },
+        //   body: JSON.stringify(increasedquantity),
+        // })
+        //   .then((res) => res.json())
+        //   .then((data) => {
+        //     console.log("succes", data);
+        //     alert("Quantity updated succesfully");
+        //   });
+      };
+
+
+
+      useEffect(() => {
+        setMinimumorder(product.minimumorder);
+        setPric(product.priceperunit)
+      }, [product]);
+
+      
+    
         if (loading) {
           return <Loading></Loading>;
         }
-     
+
+      
+
+        const completeOrder = () => {
+          const productname = product.name;
+          const productquantity = product.minimumorder;
+          const productprice = product.priceperunit;
+
+          const name = user.displayName;
+          const email = user.email;
+
+          const city = cityref.current.value;
+          const country = countryref.current.value;
+          const zip = zipref.current.value;
+          const payment = paymentref.current.value;
+
+          const Allinformation = { productname, productquantity, productprice,name,email,city,country,zip,payment };
+          console.log(Allinformation)
+
+            //  const url = "http://localhost:5000/service";
+            //  fetch(url, {
+            //    method: "POST",
+            //    headers: {
+            //      "content-type": "application/json",
+            //    },
+            //    body: JSON.stringify(Allinformation),
+            //  })
+            //    .then((res) => res.json())
+            //    .then((result) => console.log(result));
+
+
+        }     
     return (
-      <div>
-        <div className='flex justify-evenly'>
-          <div class="card w-96 bg-base-100 shadow-xl">
+      <div className='flex justify-center items-center my-10'>
+        <div className="flex justify-evenly">
+          <div class="card w-96 bg-base-100 shadow-xl ">
             <figure>
               <img src={product?.img} alt="Shoes" />
             </figure>
@@ -67,35 +170,45 @@ const Purchase = () => {
               </h2>
 
               <div class="card-actions justify-start">
-                <h3>Price:{product.priceperunit} $</h3>
+                <h3>Price:{price} $</h3>
+                <h3>Quantity : {minimumorder}</h3>
               </div>
             </div>
-          </div>
-          <div className="flex flex-col items-center">
-         
-            <form
-              className="flex flex-col  px-5 py-10 mx-5 my-5  border-solid border-2"
-              onSubmit={(e) => handlerestock(e, id)}
-            >
-             
-              <input
-                type="number"
-                placeholder='Increse Items'
-                className="border-solid border-2 my-5"
-                ref={amountref}
-              />
-              <button
-                className="flex mb-3 bg-orange-600 text-white rounded-md px-2 py-2 w-full"
-                type="submit"
-              >
-                Submit
-              </button>
-            </form>
+            <div className='flex flex-col items-center mb-6'>
+              <form onSubmit={(e) => handlerestock(e, id)}>
+                <input
+                  type="number"
+                  placeholder="Increase quantity"
+                  ref={increaseref}
+                  className="border-solid border-2"
+                />
+                <button
+                  className="bg-orange-600 ml-5 px-4 text-white"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+              <form onSubmit={(e) => reduceQuantity(e, id)}>
+                <input
+                  type="number"
+                  placeholder="Reduce quantity"
+                  ref={reduceref}
+                  className="border-solid border-2"
+                />
+                <button
+                  className="bg-orange-600 ml-5 px-4 text-white"
+                  type="submit"
+                >
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
         </div>
 
         <div class="leading-loose flex justify-center my-20">
-          <form class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
+          <div class="max-w-xl m-4 p-10 bg-white rounded shadow-xl">
             <p class="text-gray-800 font-medium">Customer information</p>
             <div class="">
               <label class="block text-sm text-gray-00" for="cus_name">
@@ -107,7 +220,7 @@ const Purchase = () => {
                 name="cus_name"
                 type="text"
                 required=""
-                value={user.displayName}
+                value={user?.displayName}
                 placeholder="Your Name"
                 aria-label="Name"
                 disabled
@@ -133,15 +246,7 @@ const Purchase = () => {
               <label class=" block text-sm text-gray-600" for="cus_email">
                 Address
               </label>
-              <input
-                class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
-                id="cus_email"
-                name="cus_email"
-                type="text"
-                required=""
-                placeholder="Street"
-                aria-label="Email"
-              />
+             
             </div>
             <div class="mt-2">
               <label class="hidden text-sm block text-gray-600" for="cus_email">
@@ -151,6 +256,7 @@ const Purchase = () => {
                 class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
                 id="cus_email"
                 name="cus_email"
+                ref={cityref}
                 type="text"
                 required=""
                 placeholder="City"
@@ -167,6 +273,7 @@ const Purchase = () => {
                 name="cus_email"
                 type="text"
                 required=""
+                ref={countryref}
                 placeholder="Country"
                 aria-label="Email"
               />
@@ -180,6 +287,7 @@ const Purchase = () => {
                 id="cus_email"
                 name="cus_email"
                 type="text"
+                ref={zipref}
                 required=""
                 placeholder="Zip"
                 aria-label="Email"
@@ -194,6 +302,7 @@ const Purchase = () => {
                 class="w-full px-2 py-2 text-gray-700 bg-gray-200 rounded"
                 id="cus_name"
                 name="cus_name"
+                ref={paymentref}
                 type="text"
                 required=""
                 placeholder="Card Number MM/YY CVC"
@@ -202,13 +311,14 @@ const Purchase = () => {
             </div>
             <div class="mt-4">
               <button
+              onClick={completeOrder}
                 class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
                 type="submit"
               >
-                $3.00
+                Complete Order
               </button>
             </div>
-          </form>
+          </div>
         </div>
       </div>
     );

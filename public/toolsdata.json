@@ -4,7 +4,7 @@
         "name" : "Cordless Drill",
         "img" :"https://i.ibb.co/0CYBXvt/cordless-drill.webp",
         "description" : "Cordless Drill construction tools are an essential tool that is used to make pilot holes, replacing jumper (i.e. a unique kind of drill should be implemented while drilling concrete)",
-        "minimumorder":"50",
+        "minimumorder":50,
         "availablequantity" : "500",
         "priceperunit":"57"
     },
@@ -13,7 +13,7 @@
         "name" : "Dewatering Pump",
         "img" :"https://i.ibb.co/vqRcBjs/Dewatering-Pump.webp",
         "description" : "Dewatering pumps are centrifugal pumps installed below the groundwater level to take out water for water bodies and, this is performed to lower the water level and maintain the same level. ",
-        "minimumorder":"20",
+        "minimumorder":20,
         "availablequantity" : "200",
         "priceperunit":"200"
     },
@@ -22,7 +22,7 @@
         "name" : "Measuring Wheel",
         "img" :"https://i.ibb.co/HNGNQvR/measuringwheel.webp",
         "description" : "Measuring wheels are very simple devices. It consists of a wheel attached to a long handle with a grip. As the wheel turns, it marks the revolving distance, quickly calculating the distance.",
-        "minimumorder":"30",
+        "minimumorder":30,
         "availablequantity" : "300",
         "priceperunit":"300"
     },
@@ -31,7 +31,7 @@
         "name" : "Wrench",
         "img" :"https://i.ibb.co/4Nd0b3W/nail-guns.jpg",
         "description" : "A wrench or spanner is a tool used to provide grip and mechanical advantage in applying torque to turn objects—usually rotary fasteners, such as nuts and bolts—or keep them from turning",
-        "minimumorder":"100",
+        "minimumorder":100,
         "availablequantity" : "350",
         "priceperunit":"90"
 
@@ -41,7 +41,7 @@
         "name" : "Polishers",
         "img" :"https://i.ibb.co/42mpLxx/polisgers.webp",
         "description" : "Polisher construction tools are mainly in use for smoothening the wood or marble flooring surfaces.",
-        "minimumorder":"150",
+        "minimumorder":150,
         "availablequantity" : "450",
         "priceperunit":"120"
 
@@ -51,7 +51,7 @@
         "name" : "Vacuum Blower",
         "img" :"https://i.ibb.co/6XqWvhM/vacuam-blower.webp",
         "description" : "A vacuum Blower is a tool mainly used to clean the surface impurities, i.e., dust from the surface area like a concrete slab or any floor surface.",
-        "minimumorder":"90",
+        "minimumorder":90,
         "availablequantity" : "200",
         "priceperunit":"170"
 

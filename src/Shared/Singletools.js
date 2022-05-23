@@ -30,15 +30,16 @@ const Singletools = ({tools}) => {
         };
   
     return (
-      <div class="card lg:card-top bg-base-100 shadow-xl lg:w-3/12 my-10 mx-10 lg:py-10 sm:w-full">
+      <div class="card lg:card-top bg-base-100 shadow-xl lg:w-4/12 my-10 mx-10 lg:py-10 sm:w-full">
         <figure>
           <img src={img} alt="Album" className="w-2/4" />
         </figure>
-        <div class="card-body">
+        <div class="card-body px-2">
           <h2 class="card-title">Name : {name}</h2>
           <p>Description : {description}</p>
           <p>Available Quantity : {availablequantity}</p>
           <p>Price Per Unit : {priceperunit}</p>
+          <p>Minimum Buying Quantity : {minimumorder}</p>
           <div class="card-actions justify-start">
           
               <button

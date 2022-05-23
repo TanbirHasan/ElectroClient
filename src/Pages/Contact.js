@@ -8,7 +8,7 @@ const Contact = () => {
             id="contact"
         >
             <div 
-                class="container"
+                class="container w-full"
             >
                 <div
                     class="mb-5 flex items-center max-w-md"
