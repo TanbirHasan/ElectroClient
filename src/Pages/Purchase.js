@@ -46,22 +46,34 @@ const Purchase = () => {
             setMinimumorder(minimumorder - number);
             const updatednumber = minimumorder - number;
             console.log(minimumorder);
+
+
+
+               const updatedprice = product.priceperunit * number;
+           
+
+      
+               setPrice(price - updatedprice);
+
+               const newprice = price - updatedprice;
+
+               console.log(newprice)
             const updatedquantity = { updatednumber };
 
             console.log(updatedquantity);
 
-            const url = `http://localhost:7000/reduce/${id}`;
-            fetch(url, {
-              method: "PUT",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(updatedquantity),
-            })
-              .then((res) => res.json())
-              .then((data) => {
-                console.log("succes", data);
-              });
+            // const url = `http://localhost:7000/reduce/${id}`;
+            // fetch(url, {
+            //   method: "PUT",
+            //   headers: {
+            //     "Content-Type": "application/json",
+            //   },
+            //   body: JSON.stringify(updatedquantity),
+            // })
+            //   .then((res) => res.json())
+            //   .then((data) => {
+            //     console.log("succes", data);
+            //   });
        
 
          console.log(minimumorder);
@@ -77,20 +89,23 @@ const Purchase = () => {
         const number = parseInt(increaseref.current.value);
 
         setMinimumorder(minimumorder + number);
-        setPrice(number*price);
+      
       
 
     
         const updatedquantity = minimumorder + number;
-        const pricerperunit = price;
-        const updatedprice = pricerperunit * number;
-        console.log(price)
+        
+        const updatedprice = product.priceperunit * number;
+        console.log(product.priceperunit);
         console.log(number);
       
         console.log(updatedquantity);
+          setPrice(price+updatedprice);
+
+          const newprice = price + updatedprice;
 
 
-        const increasedquantity = { updatedquantity, updatedprice }; 
+        const increasedquantity = { updatedquantity }; 
 
 
         console.log(increasedquantity);
@@ -116,7 +131,7 @@ const Purchase = () => {
 
       useEffect(() => {
         setMinimumorder(product.minimumorder);
-        setPric(product.priceperunit)
+        setPrice(product.priceperunit*product.minimumorder)
       }, [product]);
 
       
@@ -129,12 +144,12 @@ const Purchase = () => {
 
         const completeOrder = () => {
           const productname = product.name;
-          const productquantity = product.minimumorder;
-          const productprice = product.priceperunit;
+          const productquantity = minimumorder;
+          const productprice = price;
 
           const name = user.displayName;
           const email = user.email;
-
+     
           const city = cityref.current.value;
           const country = countryref.current.value;
           const zip = zipref.current.value;
@@ -143,21 +158,27 @@ const Purchase = () => {
           const Allinformation = { productname, productquantity, productprice,name,email,city,country,zip,payment };
           console.log(Allinformation)
 
-            //  const url = "http://localhost:5000/service";
-            //  fetch(url, {
-            //    method: "POST",
-            //    headers: {
-            //      "content-type": "application/json",
-            //    },
-            //    body: JSON.stringify(Allinformation),
-            //  })
-            //    .then((res) => res.json())
-            //    .then((result) => console.log(result));
+             const url = "http://localhost:7000/order";
+             fetch(url, {
+               method: "POST",
+               headers: {
+                 "content-type": "application/json",
+               },
+               body: JSON.stringify(Allinformation),
+             })
+               .then((res) => res.json())
+               .then((result) => {
+                 
+                console.log(result)
+                 alert("Your Order Placed Successfully");
+              }
+             
+                 );
 
 
         }     
     return (
-      <div className='flex justify-center items-center my-10'>
+      <div className="flex justify-center items-center my-10">
         <div className="flex justify-evenly">
           <div class="card w-96 bg-base-100 shadow-xl ">
             <figure>
@@ -170,11 +191,15 @@ const Purchase = () => {
               </h2>
 
               <div class="card-actions justify-start">
-                <h3>Price:{price} $</h3>
-                <h3>Quantity : {minimumorder}</h3>
+                <h3 className="text-2xl font-semibold">
+                  Total-Price:{price} $
+                </h3>
+                <h3 className="text-2xl font-semibold">
+                  Quantity : {minimumorder}
+                </h3>
               </div>
             </div>
-            <div className='flex flex-col items-center mb-6'>
+            <div className="flex flex-col items-center mb-6">
               <form onSubmit={(e) => handlerestock(e, id)}>
                 <input
                   type="number"
@@ -246,7 +271,6 @@ const Purchase = () => {
               <label class=" block text-sm text-gray-600" for="cus_email">
                 Address
               </label>
-             
             </div>
             <div class="mt-2">
               <label class="hidden text-sm block text-gray-600" for="cus_email">
@@ -311,7 +335,7 @@ const Purchase = () => {
             </div>
             <div class="mt-4">
               <button
-              onClick={completeOrder}
+                onClick={completeOrder}
                 class="px-4 py-1 text-white font-light tracking-wider bg-gray-900 rounded"
                 type="submit"
               >

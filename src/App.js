@@ -16,6 +16,11 @@ import NotFound from './Shared/NotFound';
 import Purchase from './Pages/Purchase';
 import { createContext, useState } from 'react';
 import ProductDetails from './Pages/ProductDetails';
+import Dashboard from './Pages/Dashboard';
+import RequireAuth from './RequireAuth';
+import MyProfile from './Pages/MyProfile';
+import MyReview from './Pages/MyReview';
+import MyOrders from './Pages/MyOrders';
 
 
 
@@ -26,25 +31,34 @@ function App() {
 
 
   return (
+    <div className="App">
+      <Navbar />
 
-      <div className="App">
-    
-        <Navbar />
+      <Routes>
+        <Route exact path="/" element={<Home />}></Route>
+        <Route path="/contact" element={<Contact />}></Route>
+        <Route path="/about" element={<About />}></Route>
+        <Route path="/productdetails" element={<ProductDetails />}></Route>
+        <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        >
+          <Route index element={<MyProfile />}></Route>
+          <Route path="review" element={<MyReview />}></Route>
+          <Route path="orders" element={<MyOrders />}></Route>
+        </Route>
+        <Route path="/purchase/:id" element={<Purchase />}></Route>
+        <Route path="*" element={<NotFound />}></Route>
+      </Routes>
 
-        <Routes>
-          <Route exact path="/" element={<Home />}></Route>
-          <Route path="/contact" element={<Contact />}></Route>
-          <Route path="/about" element={<About />}></Route>
-          <Route path="/productdetails" element={<ProductDetails />}></Route>
-          <Route path="/login" element={<Login />}></Route>
-          <Route path="/register" element={<Register />}></Route>
-          <Route path="/purchase/:id" element={<Purchase />}></Route>
-          <Route path="*" element={<NotFound />}></Route>
-        </Routes>
-
-        <Footer />
-      </div>
-
+      <Footer />
+    </div>
   );
 }
 

@@ -86,6 +86,18 @@ const Navbar = () => {
               <li>
                 <Link to="/contact">Contact</Link>
               </li>
+              {user ? (
+                <li>
+                  <Link to="/dashboard">
+                    Dashboard
+                    <span className='font-semibold'>
+                      {`(${user.displayName})`}
+                    </span>
+                  </Link>
+                </li>
+              ) : (
+                <span></span>
+              )}
               {!user ? (
                 <li>
                   <Link to="/register">Register</Link>
