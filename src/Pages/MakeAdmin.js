@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useTransition } from 'react';
 import { useQuery } from 'react-query';
 import Loading from '../Shared/Loading';
 import UserRow from './UserRow';
@@ -53,7 +53,7 @@ const MakeAdmin = () => {
             </thead>
             <tbody>
               {users.map((user,index) => (
-                <UserRow key={user._id} index={index} user={user} />
+                <UserRow key={user._id} index={index} users={user} />
               ))}
             </tbody>
           </table>

@@ -28,6 +28,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [email, setEmail] = useState(" ");
+ 
 
  const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
 
@@ -35,7 +36,10 @@ const Login = () => {
     useSignInWithEmailAndPassword(auth);
   const [sendPasswordResetEmail, sending, fpasserror] =
     useSendPasswordResetEmail(auth);
+       const [token] = useToken(user || guser);
 
+
+       
 
   let from = location.state?.from?.pathname || "/";
 
@@ -44,37 +48,31 @@ const Login = () => {
 
   //  }
 
-  //  useEffect(() => {
-  //    if (token) {
-  //      navigate(from, { replace: true });
-  //    }
-  //  },[token,from,navigate])
+
+   useEffect(() => {
+     if (user || guser) {
+       navigate(from, { replace: true });
+     }
+   },[token])
 
   let errorMessage;
-  const [token] = useToken(user || guser)
-
-
-
-
-      if (token) {
-        navigate(from, { replace: true });
-      }
-
- 
-
 
     if (loading || gloading) {
       return <Loading></Loading>;
     }
+    if (error) {
+      errorMessage = <p className="text-red">{error?.message}</p>;
+    }
+
+
+
 
   const onSubmit = (data) => {
     console.log(data);
     signInWithEmailAndPassword(data.email, data.password);
     setEmail(data.email);
   };
-  if (error) {
-    errorMessage = <p className="text-red">{error?.message}</p>;
-  }
+
 
   return (
     <div className="mt-20 py-10">

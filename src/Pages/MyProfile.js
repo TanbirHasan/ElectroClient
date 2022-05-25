@@ -1,10 +1,14 @@
 import axios from 'axios';
+import { signOut } from 'firebase/auth';
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useNavigate } from 'react-router-dom';
 import auth from '../firebase.init';
 
 const MyProfile = () => {
     const [user] = useAuthState(auth);
+    const navigate = useNavigate();
+    const [disable,setDisable] = useState(false)
   
 
 
@@ -14,23 +18,48 @@ const MyProfile = () => {
     const [userinfo ,setUserinfo] = useState()
 
 
+      //  useEffect(() => {
+      //    const getOrders = async () => {
+      //      const email = user.email;
+      //      console.log(email);
+      //      const url = `http://localhost:7000/userInfo?email=${email}`;
+      //      const { data } = await axios.get(url
+      //       , {
+      //        headers: {
+      //          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+      //        },
+      //      }
+      //      );
+      //      console.log(data);
+      //      setUserinfo(data[0]);
+      //    };
+      //    getOrders();
+      //  }, [user]);
+
        useEffect(() => {
-         const getOrders = async () => {
-           const email = user.email;
-           console.log(email);
-           const url = `http://localhost:7000/userInfo?email=${email}`;
-           const { data } = await axios.get(url, {
+         if (user) {
+           fetch(`http://localhost:7000/userInfo?email=${user.email}`, {
+             method: "GET",
              headers: {
                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
              },
-           });
-           console.log(data);
-           setUserinfo(data[0]);
-         };
-         getOrders();
+           })
+             .then((res) => {
+               if (res.status === 401 || res.status === 403) {
+                 navigate("/");
+                 signOut(auth);
+                 localStorage.removeItem("accessToken");
+               }
+               return res.json();
+             })
+             .then((data) => {
+               setUserinfo(data[0]);
+               console.log(data);
+             });
+         }
        }, [user]);
 
-
+  
   
      
 
@@ -45,20 +74,20 @@ const MyProfile = () => {
         const userInfo = { email,name ,location,phone,linkedin};
         console.log(userInfo);
 
-
-        //    const url = "http://localhost:7000/userInfo";
-        //    fetch(url, {
-        //      method: "POST",
-        //      headers: {
-        //        "content-type": "application/json",
-        //      },
-        //      body: JSON.stringify(userInfo),
-        //    })
-        //      .then((res) => res.json())
-        //      .then((result) => {
-        //        console.log(result);
-        //        alert("Your User Information Updated Successfully");
-        //      });
+ 
+          //    const url = "http://localhost:7000/userInfo";
+          //    fetch(url, {
+          //      method: "POST",
+          //      headers: {
+          //        "content-type": "application/json",
+          //      },
+          //      body: JSON.stringify(userInfo),
+          //    })
+          //      .then((res) => res.json())
+          //      .then((result) => {
+          //        console.log(result);
+          //        alert("Your User Information Updated Successfully");
+          //      });
 
           fetch(`http://localhost:7000/users/${email}`, {
             method: "PUT",
@@ -122,6 +151,7 @@ const MyProfile = () => {
                     id="email"
                     class="border-1  rounded-r px-4 py-2 w-full"
                     type="text"
+                    required
                   />
                 </div>
                 <div class="pb-4">
@@ -136,6 +166,7 @@ const MyProfile = () => {
                     ref={phoneref}
                     class="border-1  rounded-r px-4 py-2 w-full"
                     type="number"
+                    required
                   />
                 </div>
                 <div class="pb-4">
@@ -150,9 +181,10 @@ const MyProfile = () => {
                     ref={linkedinref}
                     class="border-1  rounded-r px-4 py-2 w-full"
                     type="text"
+                    required
                   />
                 </div>
-                <button className="btn btn-success" type="submit">
+                <button className="btn btn-success" type="submit" disabled={disable}>
                   Submit
                 </button>
                 <button className="btn btn-primary ml-5" type="submit">

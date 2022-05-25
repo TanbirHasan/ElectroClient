@@ -1,16 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { toast } from "react-toastify";
+import auth from "../firebase.init";
 
-const UserRow = ({ user ,index}) => {
-  const { email, _id, name, role } = user;
+const UserRow = ({ users ,index}) => {
+
+    const [user] = useAuthState(auth);
+
+
+ 
+   const { email,role ,_id, name } = users;
 
   const makeAdmin = () => {
-    fetch(`http://localhost:8000/users/admin/${email}`, {
+
+
+    fetch(`http://localhost:7000/users/admin/${email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,
       },
     })
+    // .then(res => res.json())
+    // .then(data => console.log(data));
+
+
       .then((res) => {
         if (res.status === 403 || 401) {
           toast.error("You are not an admin");
@@ -23,6 +36,8 @@ const UserRow = ({ user ,index}) => {
           toast.success("Successfully make an Admin");
         }
       });
+
+    
   };
 
   return (
