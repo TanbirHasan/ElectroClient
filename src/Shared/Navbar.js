@@ -5,7 +5,13 @@ import auth from '../firebase.init';
 import { signOut } from "firebase/auth";
 
 const Navbar = () => {
-    const [user] = useAuthState(auth)
+    const [user] = useAuthState(auth);
+    console.log(user);
+
+    const logout = () => {
+      signOut(auth);
+      localStorage.removeItem("accessToken");
+    }
     return (
       <div>
         <div class="navbar bg-blue-100 px-10">
@@ -91,7 +97,7 @@ const Navbar = () => {
                   <Link to="/dashboard">
                     Dashboard
                     <span className='font-semibold'>
-                      {`(${user.displayName})`}
+                      {`(${user?.displayName})`}
                     </span>
                   </Link>
                 </li>
@@ -112,7 +118,7 @@ const Navbar = () => {
                 </li>
               ) : (
                 <li>
-                  <button onClick={() => signOut(auth)}>Logout</button>
+                  <button onClick={logout}>Logout</button>
                 </li>
               )}
             </ul>

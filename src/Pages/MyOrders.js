@@ -16,7 +16,11 @@ const MyOrders = () => {
         console.log(email);
         const url = `http://localhost:7000/myorder?email=${email}`;
 
-        const { data } = await axios.get(url);
+        const { data } = await axios.get(url,{
+             headers: {
+                authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+             }
+               });
         setItems(data);
       };
       getItem();

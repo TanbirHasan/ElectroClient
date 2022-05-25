@@ -11,6 +11,7 @@ import {
 import { useForm } from "react-hook-form";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import auth from "../firebase.init";
+import useToken from "../Hooks/useToken";
 import Loading from "../Shared/Loading";
 
 
@@ -31,13 +32,15 @@ const Registerhookform = () => {
     handleSubmit,
   } = useForm();
 
+  const [token] = useToken(user || guser)
+
 
   let errorMessage;
 
   if (loading || updating || gloading) {
     return <Loading></Loading>;
   }
-  if (user) {
+  if (token) {
     navigate("/");
   }
 

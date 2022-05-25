@@ -8,6 +8,7 @@ import { useForm } from "react-hook-form";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../firebase.init";
 import Loading from "../Shared/Loading";
+import useToken from "../Hooks/useToken";
 
 import {
   useSignInWithGithub,
@@ -50,14 +51,21 @@ const Login = () => {
   //  },[token,from,navigate])
 
   let errorMessage;
+  const [token] = useToken(user || guser)
 
-  if (loading || gloading) {
-    return <Loading></Loading>;
-  }
 
-  if (user || guser) {
-    navigate(from, { replace: true });
-  }
+
+
+      if (token) {
+        navigate(from, { replace: true });
+      }
+
+ 
+
+
+    if (loading || gloading) {
+      return <Loading></Loading>;
+    }
 
   const onSubmit = (data) => {
     console.log(data);

@@ -1,25 +1,34 @@
+import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from '../firebase.init';
 
 const MyProfile = () => {
     const [user] = useAuthState(auth);
-    console.log(user);
+  
+
 
     const locationref = useRef();
     const phoneref = useRef();
     const linkedinref = useRef();
-    const [userinfo ,setUserinfo] = useState({})
+    const [userinfo ,setUserinfo] = useState()
 
 
-     useEffect(() => {
-       fetch("http://localhost:7000/userInfo")
-         .then((res) => res.json())
-         .then((data) => {
-             console.log(data)
-             setUserinfo(data[0])
-         });
-     }, []);
+       useEffect(() => {
+         const getOrders = async () => {
+           const email = user.email;
+           console.log(email);
+           const url = `http://localhost:7000/userInfo?email=${email}`;
+           const { data } = await axios.get(url, {
+             headers: {
+               authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+             },
+           });
+           console.log(data);
+           setUserinfo(data[0]);
+         };
+         getOrders();
+       }, [user]);
 
 
   
@@ -33,23 +42,35 @@ const MyProfile = () => {
         const phone = phoneref.current.value;
         const linkedin = linkedinref.current.value;
 
-        const userInfo = { name ,email,location,phone,linkedin};
+        const userInfo = { email,name ,location,phone,linkedin};
         console.log(userInfo);
 
 
-           const url = "http://localhost:7000/userInfo";
-           fetch(url, {
-             method: "POST",
-             headers: {
-               "content-type": "application/json",
-             },
-             body: JSON.stringify(userInfo),
-           })
-             .then((res) => res.json())
-             .then((result) => {
-               console.log(result);
-               alert("Your User Information Updated Successfully");
-             });
+        //    const url = "http://localhost:7000/userInfo";
+        //    fetch(url, {
+        //      method: "POST",
+        //      headers: {
+        //        "content-type": "application/json",
+        //      },
+        //      body: JSON.stringify(userInfo),
+        //    })
+        //      .then((res) => res.json())
+        //      .then((result) => {
+        //        console.log(result);
+        //        alert("Your User Information Updated Successfully");
+        //      });
+
+          fetch(`http://localhost:7000/users/${email}`, {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify(userInfo),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log("data inside useToken", data);
+            });
 
     }
     return (
@@ -144,23 +165,23 @@ const MyProfile = () => {
             <h3>Your Updated Information</h3>
             <h4>
               <storng className="text-1xl">Name : </storng>
-              {userinfo.name}
+              {user?.displayName}
             </h4>
             <h4>
               <storng>Email : </storng>
-              {userinfo.email}
+              {user?.email}
             </h4>
             <h4>
               <storng>Phone : </storng>
-              {userinfo.phone}
+              {userinfo?.phone}
             </h4>
             <h4>
               <storng>Location : </storng>
-              {userinfo.location}
+              {userinfo?.location}
             </h4>
             <h4>
               <storng>LInkedin : </storng>
-              {userinfo.linkedin}
+              {userinfo?.linkedin}
             </h4>
           </div>
         </div>
