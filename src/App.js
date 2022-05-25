@@ -21,6 +21,9 @@ import RequireAuth from './RequireAuth';
 import MyProfile from './Pages/MyProfile';
 import MyReview from './Pages/MyReview';
 import MyOrders from './Pages/MyOrders';
+import MakeAdmin from './Pages/MakeAdmin';
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 
 
@@ -52,10 +55,12 @@ function App() {
           <Route index element={<MyProfile />}></Route>
           <Route path="review" element={<MyReview />}></Route>
           <Route path="orders" element={<MyOrders />}></Route>
+          <Route path="makeadmin" element={<MakeAdmin />}></Route>
         </Route>
         <Route path="/purchase/:id" element={<Purchase />}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
+      <ToastContainer></ToastContainer>
 
       <Footer />
     </div>
