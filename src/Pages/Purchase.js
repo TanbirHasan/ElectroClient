@@ -42,9 +42,16 @@ const Purchase = () => {
           const number = parseInt(reduceref.current.value);
 
           console.log(minimumorder);
-        
-            setMinimumorder(minimumorder - number);
-            const updatednumber = minimumorder - number;
+             const updatednumber = minimumorder - number;
+
+             if (updatednumber < product.minimumorder){
+               alert(`Your need to buy ${product.minimumorder} product not less `)
+               reduceref.current.value = " ";
+             } 
+             else{
+               setMinimumorder(updatednumber);
+             }
+          
             console.log(minimumorder);
 
 
@@ -86,14 +93,24 @@ const Purchase = () => {
      }, [])
       const handlerestock = (e, id) => {
         e.preventDefault();
+
+
         const number = parseInt(increaseref.current.value);
 
-        setMinimumorder(minimumorder + number);
+        const updatedquantity = minimumorder + number;
+        if (updatedquantity > product.availablequantity) {
+          alert("Your product amount is more than available quantity, please reduce your product amount")
+          increaseref.current.value = " ";
+        } else {
+        setMinimumorder(updatedquantity);
+        }
+
+
       
       
 
     
-        const updatedquantity = minimumorder + number;
+        
         
         const updatedprice = product.priceperunit * number;
         console.log(product.priceperunit);
@@ -197,6 +214,7 @@ const Purchase = () => {
                 <h3 className="text-2xl font-semibold">
                   Quantity : {minimumorder}
                 </h3>
+                <h3 className='text-2xl font-semibold'>Available Quantity: {product.availablequantity}</h3>
               </div>
             </div>
             <div className="flex flex-col items-center mb-6">
