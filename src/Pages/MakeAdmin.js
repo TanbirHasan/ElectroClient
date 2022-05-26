@@ -38,6 +38,9 @@ const MakeAdmin = () => {
 
         })
     },  [users])
+
+
+    
     return (
       <div>
         <h3>Users length : {users.length} </h3>
