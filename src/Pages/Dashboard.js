@@ -27,24 +27,48 @@ const Dashboard = () => {
           <li>
             <Link to="/dashboard">Profile</Link>
           </li>
-          {
-            !admin ?  <li>
-            <Link to="/dashboard/orders">My Orders</Link>
-          </li> : <span></span>
-          }
-          {
-            !admin ?    
-          <li>
-            <Link to="/dashboard/review">Add a Review</Link>
-          </li> : <span></span>
-          }
-          {
-            admin ?   <li>
-            <Link to="/dashboard/makeadmin">Make a Admin</Link>
-          </li> : <span></span>
-          }
-      
-        
+          {!admin ? (
+            <li>
+              <Link to="/dashboard/orders">My Orders</Link>
+            </li>
+          ) : (
+            <span></span>
+          )}
+          {!admin ? (
+            <li>
+              <Link to="/dashboard/review">Add a Review</Link>
+            </li>
+          ) : (
+            <span></span>
+          )}
+          {admin ? (
+            <li>
+              <Link to="/dashboard/makeadmin">Make a Admin</Link>
+            </li>
+          ) : (
+            <span></span>
+          )}
+          {admin ? (
+            <li>
+              <Link to="/dashboard/manageorders">Mange Orders</Link>
+            </li>
+          ) : (
+            <span></span>
+          )}
+          {admin ? (
+            <li>
+              <Link to="/dashboard/addaproduct">Add Product</Link>
+            </li>
+          ) : (
+            <span></span>
+          )}
+          {admin ? (
+            <li>
+              <Link to="/dashboard/manageproduct">Manage Product</Link>
+            </li>
+          ) : (
+            <span></span>
+          )}
         </ul>
       </div>
     </div>

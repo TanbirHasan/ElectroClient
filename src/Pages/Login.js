@@ -43,10 +43,7 @@ const Login = () => {
 
   let from = location.state?.from?.pathname || "/";
 
-  //  if(user){
-  //     navigate(from, { replace: true });
-
-  //  }
+ 
 
 
    useEffect(() => {

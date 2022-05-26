@@ -24,6 +24,9 @@ import MyOrders from './Pages/MyOrders';
 import MakeAdmin from './Pages/MakeAdmin';
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ManageAllOrders from './Pages/ManageAllOrders';
+import AddaProduct from './Pages/AddaProduct';
+import ManageProduct from './Pages/ManageProduct';
 
 
 
@@ -56,6 +59,9 @@ function App() {
           <Route path="review" element={<MyReview />}></Route>
           <Route path="orders" element={<MyOrders />}></Route>
           <Route path="makeadmin" element={<MakeAdmin />}></Route>
+          <Route path="manageorders" element={<ManageAllOrders />}></Route>
+          <Route path="addaproduct" element={<AddaProduct />}></Route>
+          <Route path="manageproduct" element={<ManageProduct />}></Route>
         </Route>
         <Route path="/purchase/:id" element={<Purchase />}></Route>
         <Route path="*" element={<NotFound />}></Route>
