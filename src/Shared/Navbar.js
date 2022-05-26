@@ -88,7 +88,10 @@ const Navbar = () => {
                 <Link to="/">Home</Link>
               </li>
               <li>
-                <Link to="about">About</Link>
+                <Link to="/blogs">Blog</Link>
+              </li>
+              <li>
+                <Link to="/myportfolio">My Portfolio</Link>
               </li>
               <li>
                 <Link to="/contact">Contact</Link>
@@ -97,7 +100,7 @@ const Navbar = () => {
                 <li>
                   <Link to="/dashboard">
                     Dashboard
-                    <span className='font-semibold'>
+                    <span className="font-semibold">
                       {`(${user?.displayName})`}
                     </span>
                   </Link>

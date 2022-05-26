@@ -28,6 +28,8 @@ import ManageAllOrders from './Pages/ManageAllOrders';
 import AddaProduct from './Pages/AddaProduct';
 import ManageProduct from './Pages/ManageProduct';
 import Payment from './Pages/Payment';
+import Blogs from './Pages/Blogs';
+import MyPortfolio from './Pages/MyPortfolio';
 
 
 
@@ -45,7 +47,9 @@ function App() {
       <Routes>
         <Route exact path="/" element={<Home />}></Route>
         <Route path="/contact" element={<Contact />}></Route>
-        <Route path="/about" element={<About />}></Route>
+        <Route path="/blogs" element={<Blogs />}></Route>
+        <Route path="/myportfolio" element={<MyPortfolio />}></Route>
+
         <Route path="/productdetails" element={<ProductDetails />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
