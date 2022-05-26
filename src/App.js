@@ -27,6 +27,8 @@ import "react-toastify/dist/ReactToastify.css";
 import ManageAllOrders from './Pages/ManageAllOrders';
 import AddaProduct from './Pages/AddaProduct';
 import ManageProduct from './Pages/ManageProduct';
+import Payment from './Pages/Payment';
+
 
 
 
@@ -59,6 +61,7 @@ function App() {
           <Route path="review" element={<MyReview />}></Route>
           <Route path="orders" element={<MyOrders />}></Route>
           <Route path="makeadmin" element={<MakeAdmin />}></Route>
+          <Route path="payment/:id" element={<Payment />}></Route>
           <Route path="manageorders" element={<ManageAllOrders />}></Route>
           <Route path="addaproduct" element={<AddaProduct />}></Route>
           <Route path="manageproduct" element={<ManageProduct />}></Route>

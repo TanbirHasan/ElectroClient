@@ -3,6 +3,9 @@ import BuisnessSummery from '../Shared/BuisnessSummery';
 import Carousel from '../Shared/Carousel';
 import Reviews from '../Shared/Reviews/Reiviews';
 import Tools from '../Shared/Tools';
+import UserReview from '../Shared/UserReview';
+
+
 
 const Home = () => {
     return (
@@ -10,7 +13,9 @@ const Home = () => {
             <Carousel/>
             <Tools/>
             <BuisnessSummery/>
-            <Reviews/>
+            <UserReview/>
+      
+            
             
         </div>
     );

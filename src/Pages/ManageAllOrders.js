@@ -33,7 +33,7 @@ const ManageAllOrders = () => {
 
     
     return (
-      <div className='px-5'>
+      <div className="px-5">
         <div class="overflow-x-auto">
           <table class="table w-full">
             <thead>
@@ -57,7 +57,11 @@ const ManageAllOrders = () => {
                   <td>{order.productname}</td>
                   <td>{order.productquantity}</td>
                   <td>{order.productprice}</td>
-                  <td><button className='btn btn-xs'>Delete</button></td>
+                  <td>
+                    <button className="btn btn-xs" onClick={() => handleDelete(order._id)}>
+                      Delete
+                    </button>
+                  </td>
                 </tr>
               ))}
             </tbody>

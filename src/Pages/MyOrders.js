@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../firebase.init';
 
 const MyOrders = () => {
@@ -51,12 +51,12 @@ const MyOrders = () => {
                 <th></th>
                 <th>Name</th>
                 <th>Email</th>
-                <th>City</th>
-                <th>Country</th>
+
                 <th>Product Name</th>
                 <th>Order Amount</th>
                 <th>Total Price</th>
                 <th>Action</th>
+                <th>Payment</th>
               </tr>
             </thead>
             <tbody>
@@ -65,8 +65,7 @@ const MyOrders = () => {
                   <th>{index}</th>
                   <td>{item.name}</td>
                   <td>{item.email}</td>
-                  <td>{item.city}</td>
-                  <td>{item.country}</td>
+
                   <td>{item.productname}</td>
                   <td>{item.productquantity}</td>
                   <td>{item.productprice}</td>
@@ -77,6 +76,20 @@ const MyOrders = () => {
                     >
                       Delete
                     </button>
+                  </td>
+                  <td>
+                    {item.productprice && !item.paid && (
+                      <Link to={`/dashboard/payment/${item._id}`}>
+                        <button className="btn btn-success">Payment</button>
+                      </Link>
+                    )}
+                  </td>
+                  <td>
+                    {item.productprice && item.paid && (
+                   
+                        <span className="text-success">Paid</span>
+                    
+                    )}
                   </td>
                 </tr>
               ))}

@@ -30,7 +30,7 @@ const Singletools = ({tools}) => {
         };
   
     return (
-      <div class="card lg:card-top bg-base-100 shadow-xl lg:w-4/12 my-10 mx-10 lg:py-10 sm:w-full">
+      <div class="card lg:card-top bg-base-100 shadow-xl px-10 my-10 lg:py-10 sm:w-full">
         <figure>
           <img src={img} alt="Album" className="w-2/4" />
         </figure>

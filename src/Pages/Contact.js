@@ -4,11 +4,11 @@ const Contact = () => {
     return (
    
 <section 
-            class="py-20 px-4 lg:px-16 overflow-hidden relative z-10" data-aos="fade-up" 
+            class="py-20 px-4 lg:px-16 w-full overflow-hidden relative z-10" data-aos="fade-up" 
             id="contact"
         >
             <div 
-                class="container w-full"
+                class="w-full"
             >
                 <div
                     class="mb-5 flex items-center max-w-md"
