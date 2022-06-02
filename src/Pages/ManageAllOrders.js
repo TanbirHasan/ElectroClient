@@ -3,19 +3,28 @@ import MyOrders from './MyOrders';
 
 const ManageAllOrders = () => {
     const [order, setOrder] = useState([]);
+    const [shipped,setShipped] = useState()
+
+    
 
 
     useEffect(() => {
-        fetch('http://localhost:7000/order')
+        fetch('https://infinite-shore-68933.herokuapp.com/order')
         .then(res => res.json())
         .then(data => setOrder(data))
 
     },[])
 
+
+    const handleshipped = () => {
+      setShipped(true)
+
+    }
+
       const handleDelete = (id) => {
         const proceed = window.confirm("Are you sure you want to delete?");
         if (proceed) {
-          const url = `http://localhost:7000/order/${id}`;
+          const url = `https://infinite-shore-68933.herokuapp.com/order/${id}`;
           fetch(url, {
             method: "DELETE",
           })
@@ -58,9 +67,24 @@ const ManageAllOrders = () => {
                   <td>{order.productquantity}</td>
                   <td>{order.productprice}</td>
                   <td>
-                    <button className="btn btn-xs" onClick={() => handleDelete(order._id)}>
+                    <button
+                      className="btn btn-xs"
+                      onClick={() => handleDelete(order._id)}
+                    >
                       Delete
                     </button>
+                  </td>
+                  <td>
+                    {order.paid ? <span>paid</span> : <span>Unpaid</span>}
+                  </td>
+                  <td>
+                    {order.paid ? (
+                      <button onClick={handleshipped}>
+                        {shipped ? <span>shipped</span> : <span>pending</span>}
+                      </button>
+                    ) : (
+                      <button>Not Shipped</button>
+                    )}
                   </td>
                 </tr>
               ))}

@@ -11,7 +11,7 @@ const BlogsQA = ({ title, children, index, activeIndex, setActiveIndex }) => {
     <>
       <div
         onClick={() => handleSetIndex(index)}
-        className=" flex items-center w-full	 justify-between p-2 mt-2 rounded bg-rose-200"
+        className=" flex items-center w-full	 justify-between p-2 mt-2 rounded bg-blue-200"
       >
         <div className="flex">
           <div className="text-grey-500 font-bold">{title}</div>

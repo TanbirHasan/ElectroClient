@@ -4,7 +4,7 @@ const useItemsDetails = (id) => {
   const [product, setProduct] = useState({});
 
   useEffect(() => {
-    const url = `http://localhost:7000/productdetails/${id}`;
+    const url = `https://infinite-shore-68933.herokuapp.com/productdetails/${id}`;
     fetch(url)
       .then((res) => res.json())
       .then((data) => setProduct(data));

@@ -1,27 +1,30 @@
 import React, { useEffect, useState } from 'react';
+import AwesomeSlider from "react-awesome-slider";
+import "react-awesome-slider/dist/styles.css";
 
 const UserReview = () => {
     const [review,setReview] = useState([]);
 
 
     useEffect(() => {
-        fetch("http://localhost:7000/review")
+        fetch("https://infinite-shore-68933.herokuapp.com/review")
         .then(res => res.json())
         .then(data => setReview(data))
     }, [])
     return (
       <div>
         <h3 className="text-3xl font-bold text-center">User Reviews</h3>
-        <div className="grid lg:grid-cols-3 gap-5 px-20 my-10">
+
+        <AwesomeSlider className="h-48 bg-blue-200 ">
           {review.map((review) => (
-            <div class="card w-96 bg-base-100 shadow-xl">
-              <figure>{review.rating}</figure>
-              <div class="card-body">
-                <h2 class="card-title">{review.message}</h2>
-              </div>
+            <div className='lg:px-20 sm:px-0'>
+              <h3 className='font-semibold text-xl text-center my-5'>{review?.username}</h3>
+              <p className="text-xl font-semibold text-black text-center px-20">
+                {review.message}
+              </p>
             </div>
           ))}
-        </div>
+        </AwesomeSlider>
       </div>
     );
 };

@@ -9,7 +9,7 @@ const useToken = (user) => {
 
     const currentuser = { email };
     if (email) {
-      fetch(`http://localhost:7000/users/${email}`, {
+      fetch(`https://infinite-shore-68933.herokuapp.com/users/${email}`, {
         method: "PUT",
         headers: {
           "content-type": "application/json",

@@ -47,29 +47,23 @@ const Purchase = () => {
              if (updatednumber < product.minimumorder){
                alert(`Your need to buy ${product.minimumorder} product not less `)
                reduceref.current.value = " ";
+                 setPrice(product.priceperunit * product.minimumorder);
+
              } 
              else{
                setMinimumorder(updatednumber);
+                  const updatedprice = product.priceperunit * number;
+                    setPrice(price - updatedprice);
+
              }
           
             console.log(minimumorder);
 
 
 
-               const updatedprice = product.priceperunit * number;
-           
+            
 
-      
-               setPrice(price - updatedprice);
-
-               const newprice = price - updatedprice;
-
-               console.log(newprice)
-            const updatedquantity = { updatednumber };
-
-            console.log(updatedquantity);
-
-            // const url = `http://localhost:7000/reduce/${id}`;
+            // const url = `https://infinite-shore-68933.herokuapp.com/reduce/${id}`;
             // fetch(url, {
             //   method: "PUT",
             //   headers: {
@@ -101,8 +95,11 @@ const Purchase = () => {
         if (updatedquantity > product.availablequantity) {
           alert("Your product amount is more than available quantity, please reduce your product amount")
           increaseref.current.value = " ";
+          setPrice(product.priceperunit * product.minimumorder);
         } else {
         setMinimumorder(updatedquantity);
+         const updatedprice = product.priceperunit * number;
+        setPrice(price + updatedprice);
         }
 
 
@@ -112,24 +109,24 @@ const Purchase = () => {
     
         
         
-        const updatedprice = product.priceperunit * number;
-        console.log(product.priceperunit);
-        console.log(number);
+        // const updatedprice = product.priceperunit * number;
+        // console.log(product.priceperunit);
+        // console.log(number);
       
-        console.log(updatedquantity);
-          setPrice(price+updatedprice);
+        // console.log(updatedquantity);
+        //   setPrice(price+updatedprice);
 
-          const newprice = price + updatedprice;
-
-
-        const increasedquantity = { updatedquantity }; 
+        //   const newprice = price + updatedprice;
 
 
-        console.log(increasedquantity);
+        // const increasedquantity = { updatedquantity }; 
+
+
+        // console.log(increasedquantity);
 
        
 
-        // const url = `http://localhost:7000/increase/${id}`;
+        // const url = `https://infinite-shore-68933.herokuapp.com/increase/${id}`;
         // fetch(url, {
         //   method: "PUT",
         //   headers: {
@@ -175,7 +172,7 @@ const Purchase = () => {
           const Allinformation = { productname, productquantity, productprice,name,email,city,country,zip,payment };
           console.log(Allinformation)
 
-             const url = "http://localhost:7000/order";
+             const url = "https://infinite-shore-68933.herokuapp.com/order";
              fetch(url, {
                method: "POST",
                headers: {

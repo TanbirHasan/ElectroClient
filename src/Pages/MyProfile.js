@@ -22,7 +22,7 @@ const MyProfile = () => {
       //    const getOrders = async () => {
       //      const email = user.email;
       //      console.log(email);
-      //      const url = `http://localhost:7000/userInfo?email=${email}`;
+      //      const url = `https://infinite-shore-68933.herokuapp.com/userInfo?email=${email}`;
       //      const { data } = await axios.get(url
       //       , {
       //        headers: {
@@ -57,7 +57,7 @@ const MyProfile = () => {
                console.log(data);
              });
          }
-       }, [user]);
+       }, [user,userinfo]);
 
   
   
@@ -75,7 +75,7 @@ const MyProfile = () => {
         console.log(userInfo);
 
  
-          //    const url = "http://localhost:7000/userInfo";
+          //    const url = "https://infinite-shore-68933.herokuapp.com/userInfo";
           //    fetch(url, {
           //      method: "POST",
           //      headers: {
@@ -88,8 +88,9 @@ const MyProfile = () => {
           //        console.log(result);
           //        alert("Your User Information Updated Successfully");
           //      });
+         
 
-          fetch(`http://localhost:7000/users/${email}`, {
+          fetch(`http://localhost:7000/usersinfo/${email}`, {
             method: "PUT",
             headers: {
               "content-type": "application/json",
@@ -98,14 +99,22 @@ const MyProfile = () => {
           })
             .then((res) => res.json())
             .then((data) => {
-              console.log("data inside useToken", data);
+              if(data){
+                alert("Your Information Submitted Succesfully");
+                 console.log("data inside useToken", data);
+              }
+             
             });
+
+            locationref.current.value = " ";
+            phoneref.current.value = " ";
+            linkedinref.current.value = " ";
 
     }
     return (
       <div className="h-screen px-5">
-        <div class="h-full flex justify-between">
-          <div class="border-b-2 w-2/4 md:flex">
+        <div class="h-full flex lg:flex-row justify-between sm:flex flex-col">
+          <div class="border-b-2 lg:w-2/4 md:flex sm:w-full">
             <div class="w-full bg-white lg:ml-4 shadow-md">
               <form class="rounded  shadow p-6" onSubmit={handleSubmit}>
                 <div class="pb-6">
@@ -193,7 +202,7 @@ const MyProfile = () => {
               </form>
             </div>
           </div>
-          <div className="w-2/4 px-10">
+          <div className="lg:w-2/4 lg:px-10 sm:w-full mb-5">
             <h3>Your Updated Information</h3>
             <h4>
               <storng className="text-1xl">Name : </storng>

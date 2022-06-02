@@ -14,7 +14,7 @@ const MyOrders = () => {
       const getItem = async () => {
         const email = user.email;
         console.log(email);
-        const url = `http://localhost:7000/myorder?email=${email}`;
+        const url = `https://infinite-shore-68933.herokuapp.com/myorder?email=${email}`;
 
         const { data } = await axios.get(url,{
              headers: {
@@ -31,7 +31,7 @@ const MyOrders = () => {
      const handleDelete = (id) => {
        const proceed = window.confirm("Are you sure you want to delete?");
        if (proceed) {
-         const url = `http://localhost:7000/order/${id}`;
+         const url = `https://infinite-shore-68933.herokuapp.com/order/${id}`;
          fetch(url, {
            method: "DELETE",
          })
@@ -44,7 +44,8 @@ const MyOrders = () => {
      };
     return (
       <div className="px-5">
-        <div class="overflow-x-auto">
+        {
+          items.length > 0 ?  <div class="overflow-x-auto">
           <table class="table w-full">
             <thead>
               <tr>
@@ -70,13 +71,16 @@ const MyOrders = () => {
                   <td>{item.productquantity}</td>
                   <td>{item.productprice}</td>
                   <td>
-                    <button
-                      className="btn btn-xs"
-                      onClick={() => handleDelete(item._id)}
-                    >
-                      Delete
-                    </button>
+                    {!item.paid && (
+                      <button
+                        className="btn btn-xs text-black"
+                        onClick={() => handleDelete(item._id)}
+                      >
+                        Cancel
+                      </button>
+                    )}
                   </td>
+                 
                   <td>
                     {item.productprice && !item.paid && (
                       <Link to={`/dashboard/payment/${item._id}`}>
@@ -86,16 +90,16 @@ const MyOrders = () => {
                   </td>
                   <td>
                     {item.productprice && item.paid && (
-                   
-                        <span className="text-success">Paid</span>
-                    
+                      <span className="text-success">Paid</span>
                     )}
                   </td>
                 </tr>
               ))}
             </tbody>
           </table>
-        </div>
+        </div> : <span className='text-3xl font-semibold text-center my-10'>You have no order.</span>
+        }
+       
       </div>
     );
 };

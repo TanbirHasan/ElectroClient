@@ -10,7 +10,7 @@ const MakeAdmin = () => {
     //    isLoading,
     //    refetch,
     //  } = useQuery("users", () =>
-    //    fetch("http://localhost:7000/users", {
+    //    fetch("https://infinite-shore-68933.herokuapp.com/users", {
     //      method: "GET",
     //      headers: {
     //        authorization: `Bearer ${localStorage.getItem("accessToken")}`,
@@ -24,7 +24,7 @@ const MakeAdmin = () => {
 
     const [users,setUsers] = useState([]);
     useEffect(() => {
-        fetch("http://localhost:7000/users",{
+        fetch("https://infinite-shore-68933.herokuapp.com/users",{
             method :  "GET",
            headers: {
            authorization: `Bearer ${localStorage.getItem("accessToken")}`,

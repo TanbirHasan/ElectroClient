@@ -56,7 +56,7 @@ const Registerhookform = () => {
     <div className="mt-20 py-20">
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col items-center mx-auto my-10 w-2/4 px-5 py-5 shadow-lg"
+        className="flex flex-col items-center mx-auto my-10 lg:w-2/4 px-5 py-5 shadow-lg sm:w-full"
       >
         <div className="form-control w-full max-w-xs">
           <label className="label">

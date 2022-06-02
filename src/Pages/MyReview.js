@@ -1,6 +1,9 @@
 import React, { useRef } from 'react';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import auth from '../firebase.init';
 
 const MyReview = () => {
+  const [user] = useAuthState(auth)
     const ratingsref = useRef();
  
     const review = useRef();
@@ -9,12 +12,13 @@ const MyReview = () => {
         e.preventDefault();
     
         let ratings = ratingsref.current.value;
+        let username = user.displayName;
         let message = review.current.value;
         console.log(ratings, message);
 
-        const Finalreview = { ratings , message};
+        const Finalreview = { ratings, message, username };
 
-           const url = "http://localhost:7000/review";
+           const url = "https://infinite-shore-68933.herokuapp.com/review";
            fetch(url, {
              method: "POST",
              headers: {
@@ -25,7 +29,7 @@ const MyReview = () => {
              .then((res) => res.json())
              .then((result) => {
                console.log(result);
-               alert("Your review Placed Successfully");
+               alert("Your review Submitted Successfully");
              });
 
        ratingsref.current.value = ' ';
@@ -34,7 +38,7 @@ const MyReview = () => {
       
     }
     return (
-      <div className="mt-20">
+      <div className="my-20">
         <h3 className="px-5 font-semibold text-center">
           Give a feedback to Us
         </h3>
@@ -46,12 +50,12 @@ const MyReview = () => {
           > 
            <input type="number" 
            ref={ratingsref} 
-           className="w-1/4 border-solid border-2 py-1 rounded mb-5" 
+           className="w-1/4 border-solid border-2 py-1 p-2 rounded mb-5" 
            placeholder="Ratings between 1 to 5" required/>
             <textarea
-              class="textarea textarea-info w-2/4"
+              class="textarea textarea-info w-4/5 h-48"
               ref={review}
-              placeholder="Bio"
+              placeholder="Give your precious review"
               required
             ></textarea>
             <button className="btn btn-success mt-6" type="submit">

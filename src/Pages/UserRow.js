@@ -14,7 +14,7 @@ const UserRow = ({ users ,index}) => {
   const makeAdmin = () => {
 
 
-    fetch(`http://localhost:7000/users/admin/${email}`, {
+    fetch(`https://infinite-shore-68933.herokuapp.com/users/admin/${email}`, {
       method: "PUT",
       headers: {
         authorization: `Bearer ${localStorage.getItem("accessToken")}`,

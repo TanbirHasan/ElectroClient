@@ -9,7 +9,7 @@ const Footer = () => {
                     <div>
                     <img src="#" class="mr-5 h-6 sm:h-9" alt="logo" />
                         <p class="max-w-xs mt-4 text-sm text-gray-600">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas, accusantium.
+                       Electro. We will provide best products for your store
                         </p>
                         <div class="flex mt-8 space-x-6 text-gray-600">
                         <a class="hover:opacity-75" href target="_blank" rel="noreferrer">
@@ -51,9 +51,9 @@ const Footer = () => {
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
                             <a class="hover:opacity-75" href> About </a>
-                            <a class="hover:opacity-75" href> Meet the Team </a>
+                            <a class="hover:opacity-75" href> Our warhouse </a>
                             <a class="hover:opacity-75" href> History </a>
-                            <a class="hover:opacity-75" href> Careers </a>
+                           
                         </nav>
                         </div>
                         <div>
@@ -61,11 +61,11 @@ const Footer = () => {
                             Services
                         </p>
                         <nav class="flex flex-col mt-4 space-y-2 text-sm text-gray-500">
-                            <a class="hover:opacity-75" href> 1on1 Coaching </a>
+                           
                             <a class="hover:opacity-75" href> Company Review </a>
-                            <a class="hover:opacity-75" href> Accounts Review </a>
-                            <a class="hover:opacity-75" href> HR Consulting </a>
-                            <a class="hover:opacity-75" href> SEO Optimisation </a>
+                            <a class="hover:opacity-75" href> Our Service </a>
+                            <a class="hover:opacity-75" href> About Us </a>
+                          
                         </nav>
                         </div>
                         <div>

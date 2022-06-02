@@ -8,3 +8,22 @@
 .buisness{
   
 }
+
+.carousel-item{
+  background-image: url("../src/Image/44_8.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.navbar-end{
+  width: 25%!important;
+}
+
+.awssld__content {
+  background-color: skyblue!important;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

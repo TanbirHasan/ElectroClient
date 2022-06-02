@@ -17,7 +17,7 @@ const Payment = () => {
 
 
     const {id} = useParams();
-    const url = `http://localhost:7000/order/${id}`
+    const url = `https://infinite-shore-68933.herokuapp.com/order/${id}`
 
     const {data,isLoading} = useQuery(['order',id] , () => fetch(url,{
         method: "GET",

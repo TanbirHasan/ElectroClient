@@ -10,7 +10,7 @@ const AddaProduct = () => {
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
     console.log(data);
-    const url = "http://localhost:7000/newproduct";
+    const url = "https://infinite-shore-68933.herokuapp.com/newproduct";
     fetch(url, {
       method: "POST",
       headers: {
