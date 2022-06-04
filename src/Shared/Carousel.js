@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Fade from "react-reveal/Fade";
 
 const Carousel = () => {
     return (
@@ -10,21 +11,26 @@ const Carousel = () => {
               id="slide1"
               className="carousel-item relative w-full flex justify-center lg:flex-row items-center sm:flex flex-col-reverse"
             >
+              <Fade top>
+                <div className="mx-10">
+                  <h3 className="text-2xl">Big Sale on</h3>
+                  <h2 className="text-6xl font-bold">Drill Machine</h2>
+                  <Link to="/tools">
+                    {" "}
+                    <button class="btn btn-outline btn-accent">Buy Now</button>
+                  </Link>
+                </div>
+              </Fade>
+
               <div className="mx-10">
-                <h3 className="text-2xl">Big Sale on</h3>
-                <h2 className="text-6xl font-bold">Drill Machine</h2>
-                <Link to="/tools">
-                  {" "}
-                  <button class="btn btn-outline btn-accent">Buy Now</button>
-                </Link>
-              </div>
-              <div className="mx-10">
-                <img
-                  src="https://i.ibb.co/YD7dvv5/electricdrill-removebg-preview.png"
-                  alt="tools"
-                  height="600"
-                  width="500"
-                />
+                <Fade top>
+                  <img
+                    src="https://i.ibb.co/YD7dvv5/electricdrill-removebg-preview.png"
+                    alt="tools"
+                    height="600"
+                    width="500"
+                  />
+                </Fade>
               </div>
 
               {/* <div class="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-2/4">
@@ -42,8 +48,6 @@ const Carousel = () => {
                 </a>
               </div> */}
             </div>
-      
-       
           </div>
         </div>
       </div>

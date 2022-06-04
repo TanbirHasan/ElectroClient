@@ -27,3 +27,18 @@
   align-items: center;
   justify-content: center;
 }
+
+.new-tools{
+  background-image: url(../src/Image/newtools.jpg);
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.new-tools-one{
+    background-image: url(../src/Image/nowtoolstwo.jpg);
+      background-position: top-right;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+}

@@ -192,7 +192,7 @@ const Purchase = () => {
 
         }     
     return (
-      <div className="flex justify-center items-center my-10">
+      <div className="flex lg:flex-row justify-center items-center my-10 sm:flex flex-col mx-5">
         <div className="flex justify-evenly">
           <div class="card w-96 bg-base-100 shadow-xl ">
             <figure>

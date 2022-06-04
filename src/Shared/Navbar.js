@@ -82,7 +82,7 @@ const Navbar = () => {
             </div>
             <a class="btn btn-ghost normal-case text-xl">ElectroHouse</a>
           </div>
-          <div class="navbar hidden lg:flex w-full">
+          <div class="navbar hidden lg:flex w-full justify-center">
             <ul class="menu menu-horizontal p-0">
               <li>
                 <Link to="/">Home</Link>

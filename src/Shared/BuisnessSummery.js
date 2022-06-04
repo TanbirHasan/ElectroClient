@@ -6,12 +6,12 @@ import { IoBarChartSharp } from "react-icons/io5";
 const BuisnessSummery = () => {
     return (
       <div className="buisness">
-        <div className="flex flex-col justify-evenly items-center px-10 py-10">
+        <div className="flex flex-col justify-evenly items-center lg:px-10 py-10 sm:px-5">
           <div>
             <h2 className="text-3xl font-semibold">Buisness Summery</h2>
           </div>
-          <div className='py-10'>
-            <div class="stats shadow lg:grid grid-cols-3 sm:grid grid-rows-1">
+          <div className="py-10">
+            <div class="stats shadow flex lg:flex-row sm:flex flex-col">
               <div class="stat">
                 <div class="stat-figure text-primary">
                   <i class="fa-solid fa-users text-2xl"></i>
@@ -23,7 +23,7 @@ const BuisnessSummery = () => {
 
               <div class="stat">
                 <div class="stat-figure text-primary">
-                  <IoBarChartSharp className='text-2xl'/>
+                  <IoBarChartSharp className="text-2xl" />
                 </div>
                 <div class="stat-title">Revenue</div>
                 <div class="stat-value text-secondary">2.6M</div>

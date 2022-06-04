@@ -71,7 +71,9 @@ function App() {
           <Route path="addaproduct" element={<AddaProduct />}></Route>
           <Route path="manageproduct" element={<ManageProduct />}></Route>
         </Route>
-        <Route path="/purchase/:id" element={<Purchase />}></Route>
+        <Route path="/purchase/:id" element={<RequireAuth>
+          <Purchase/>
+        </RequireAuth>}></Route>
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
       <ToastContainer></ToastContainer>

@@ -2,6 +2,7 @@ import React from 'react';
 import BuisnessSummery from '../Shared/BuisnessSummery';
 import Carousel from '../Shared/Carousel';
 import NewArrivals from '../Shared/NewArrivals';
+import NewToolset from '../Shared/NewToolset';
 
 import Tools from '../Shared/Tools';
 import UserReview from '../Shared/UserReview';
@@ -16,6 +17,7 @@ const Home = () => {
             <Carousel/>
             <NewArrivals/>
             <Tools/>
+            <NewToolset/>
             <BuisnessSummery/>
             <UserReview/>
             <Newsletter/>
